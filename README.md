@@ -17,7 +17,7 @@ The Autonomous Content Factory is a full-stack web application that orchestrates
 
 **Key Features:**
 
-- **Lead Research & Fact-Check Agent** — Reads raw source material (text or URL), extracts core product features, technical specs, and target audience, then produces a structured "Source of Truth" (JSON/Markdown) that all downstream agents follow. Flags ambiguous statements.
+- **Lead Research & Fact-Check Agent** — Reads raw source material (text or URL), extracts core product features, technical specs, and target audience, then produces a structured "Source of Truth" that all downstream agents follow. Flags ambiguous statements.
 
 - **Creative Copywriter Agent** — Consumes the Fact-Sheet and simultaneously generates a 500-word Blog Post, a 5-post Social Media Thread, and a 1-paragraph Email Teaser — each with the appropriate tone (professional for blog, punchy for social).
 
@@ -35,17 +35,44 @@ The Autonomous Content Factory is a full-stack web application that orchestrates
 
 ## Tech Stack
 
+### Core
+| Category | Technology | Version |
+|---|---|---|
+| **Language** | TypeScript | — |
+| **UI Library** | React | 18.3.1 |
+| **Build Tool** | Vite | 6.3.5 |
+| **Package Manager** | pnpm | — |
+
+### Styling & UI Components
+| Category | Technology | Version |
+|---|---|---|
+| **CSS Framework** | Tailwind CSS | 4.1.12 |
+| **Component Primitives** | Radix UI | (various) |
+| **Component Library** | shadcn/ui (built on Radix UI) | — |
+| **Material UI** | MUI + Emotion | 7.3.5 |
+| **Icons** | Lucide React | 0.487.0 |
+| **Animations** | Motion (Framer Motion) | 12.23.24 |
+| **Theming** | next-themes | 0.4.6 |
+
+### Routing & Forms
+| Category | Technology | Version |
+|---|---|---|
+| **Routing** | React Router | 7.13.0 |
+| **Form Handling** | React Hook Form | 7.55.0 |
+
+### Data & Visualization
+| Category | Technology | Version |
+|---|---|---|
+| **Charts** | Recharts | 2.15.2 |
+| **Date Utilities** | date-fns | 3.6.0 |
+| **Drag & Drop** | React DnD | 16.0.1 |
+| **Carousel** | Embla Carousel React | 8.6.0 |
+
+### AI / LLM
 | Category | Technology |
 |---|---|
-| **Frontend Language** | TypeScript |
-| **Frontend Framework** | React (with Vite) |
-| **UI Components** | shadcn/ui |
-| **Styling** | Tailwind CSS |
-| **Package Manager** | pnpm |
-| **Post CSS** | PostCSS |
-| **AI / LLM API** | Anthropic Claude API (`claude-sonnet-4-20250514`) |
-| **Agent Orchestration** | Custom multi-agent pipeline (Claude API chained calls) |
-| **Export** | Client-side ZIP generation (JSZip) / Clipboard API |
+| **AI API** | Anthropic Claude API (`claude-sonnet-4-20250514`) |
+| **Agent Orchestration** | Custom multi-agent pipeline (chained Claude API calls) |
 
 ---
 
@@ -54,8 +81,13 @@ The Autonomous Content Factory is a full-stack web application that orchestrates
 ### Prerequisites
 
 - **Node.js** v18 or higher
-- **pnpm** v8 or higher (`npm install -g pnpm`)
-- An **Anthropic API Key** (get one at [console.anthropic.com](https://console.anthropic.com))
+- **pnpm** v8 or higher
+
+```bash
+npm install -g pnpm
+```
+
+- An **Anthropic API Key** — get one at [console.anthropic.com](https://console.anthropic.com)
 
 ### 1. Clone the Repository
 
@@ -78,7 +110,7 @@ Create a `.env` file in the root directory:
 cp .env.example .env
 ```
 
-Then open `.env` and add your Anthropic API key:
+Open `.env` and add your Anthropic API key:
 
 ```env
 VITE_ANTHROPIC_API_KEY=your_anthropic_api_key_here
@@ -104,7 +136,7 @@ pnpm preview
 ## Usage
 
 1. **Sign up / Log in** to your account.
-2. On the **Campaign Start Page**, upload a technical document or paste a URL.
+2. On the **Campaign Start Page**, upload a technical document or paste source text.
 3. Watch the **Agent Room** as the Research, Copywriter, and Editor agents collaborate in real time.
 4. Review the **Final Outputs** — Blog Post, Social Thread, and Email Teaser — in the Final Review View.
 5. Use **Approve / Regenerate** buttons to accept or refine individual pieces.
